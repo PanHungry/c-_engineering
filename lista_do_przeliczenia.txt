@@ -1,0 +1,6 @@
+Co10Cr10Fe20Mn30Ni30 [nr_pracy1] AC1 VEC1
+Cu50Zr50 [nr_pracy2] AC2 VEC2
+Al1.5CoCrCu0.5FeNi [nr_pracy3] AC3 VEC3
+AlCoCr0.5Cu0.5FeNi [nr_pracy4] AC4 VEC4
+Fe41Co7Cr15Mo14C15B6Y2 [nr_pracy5] AC5 VEC5
+Co48Cr15Mo14C15B6Er2 [nr_pracy6] AC6 VEC6

@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1526935243 source:c:\users\kamil\desktop\praca_cb\tpierwiastek.cpp
+
+1529239753 source:c:\users\kamil\desktop\praca_cb\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<math.h>
+	<sstream>
+	<algorithm>
+	<string>
+	<cstdlib>
+
+1527257125 c:\users\kamil\desktop\praca_cb\tpierwiastek.h
+	<iostream>
+	<fstream>
+
