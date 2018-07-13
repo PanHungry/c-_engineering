@@ -200,9 +200,8 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
             string surowa_linijka_cala;
 
             string surowa_linijka;
-            string numer_pracy;
-            string budowa;
-            string vec_zrodlowy;
+            string references;
+            string processing_condition;
 
             getline(lista,surowa_linijka_cala);
 
@@ -211,7 +210,11 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
             // Poniżej dzielę linijkę na: wzór, numer pracy, budowe...
 
             stringstream string_calej_linijki_w_strumien(surowa_linijka_cala);
-            string_calej_linijki_w_strumien >> surowa_linijka >> numer_pracy >> budowa >>vec_zrodlowy;
+            string_calej_linijki_w_strumien >> surowa_linijka >> processing_condition >> references;
+
+            cout << "Processing Condition: " << processing_condition <<endl;
+            cout << "References: " << references <<endl;
+
 
             //Poniżej przerobienie pobranej linijki bez spacji na taką ze spacjami i przyjującą 1 jako podstawową stechiometrię.
 
