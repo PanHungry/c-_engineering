@@ -20,6 +20,8 @@ vector <double> vec;
 vector <double> ulamek_molowy;
 vector <int> liczba_atomowa;
 
+vector <string> wyniki;
+
 // Tablica entalpi par. Wpisywanie do tablicy jest drugą funkcją przy
 // włączeniu programu z pliku entalpy_mix.txt
 
@@ -212,6 +214,8 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
             stringstream string_calej_linijki_w_strumien(surowa_linijka_cala);
             string_calej_linijki_w_strumien >> surowa_linijka >> processing_condition >> references;
 
+            wyniki.push_back(surowa_linijka);
+
             cout << "Processing Condition: " << processing_condition <<endl;
             cout << "References: " << references <<endl;
 
@@ -296,7 +300,7 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
 
             for (int i=0; i<stechiometria_w_linijce_double.size(); i++)
             {
-            cout << "Ulamek molowy skladnika " << i+1 << " wynosi: " << ulamki_molowe_w_linijce[i]<<endl;
+            //cout << "Ulamek molowy skladnika " << i+1 << " wynosi: " << ulamki_molowe_w_linijce[i]<<endl;
             }
 
             ///// wczytywanie danych metalu z tablicy danych wyjsciowych //////
@@ -322,8 +326,19 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
                 }
             }
 
+
             ///// WYNIKI
 
+            wyniki.push_back(to_string(licze_VEC(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_vec_w_linijce)));
+            wyniki.push_back(to_string(licze_mala_delta(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_promieni_atomow_w_linijce)));
+            wyniki.push_back(to_string(licze_delta_chi(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_paulingow_w_linijce)));
+            wyniki.push_back(to_string(licze_delta_s(symbole_w_linijce.size(), ulamki_molowe_w_linijce)));
+            wyniki.push_back(to_string(licze_temp_m(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_tm_w_linijce)));
+            wyniki.push_back(to_string( licze_entalpia_mix(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_liczb_atomowych_w_linijce)));
+            wyniki.push_back(processing_condition);
+            wyniki.push_back(references);
+
+            /*
             cout <<endl << "VEC linijki: " << licze_VEC(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_vec_w_linijce)<<endl;
             cout << "Mala delta linijki: " << licze_mala_delta(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_promieni_atomow_w_linijce)<<endl;
             cout << "Delta CHI: " <<licze_delta_chi(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_paulingow_w_linijce)<<endl;
@@ -333,6 +348,7 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
 
             cout << ".................................................................................................." <<endl<<endl;
 
+            */
 
             //Sprzątanie po linijce, bo zaraz wczytujemy nową...
 
@@ -347,11 +363,33 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
 
 }
 
+void zapis_do_pliku()
+{
+    fstream result( "wyniki.txt", ios::out );
+    if( result.good() )
+    {
+        for( int i = 0; i <= wyniki.size(); i++ )
+        {
+            result << wyniki[i] << '\t' ;
+
+            if(i==8 || i>10 && i%9==8)
+            {
+               result <<endl;
+            }
+
+            result.flush();
+        }
+        result.close();
+    }
+}
+
 int main()
 {
     wpisuje_dane_pierwiastkow_do_vectorow(); // funkcja wczytujaca z plikow promienie, paulinga, vec i licząca ulamek molowy
     wczytuje_tabele_entalpi_par(); // funckja wczytujaca z plikow entalpie par
     wczytuje_liste_do_przeliczenia(); // funkcja wczytujaca liste zwiazkow do obliczenia
+    zapis_do_pliku();
+
 
     /*
      Do zrobienia:
