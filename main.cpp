@@ -172,7 +172,7 @@ double entalpia_mix_stopu=0;
 void wczytuje_tabele_entalpi_par() // wczytuje dane entalpi par do tablicy tablica_entalpi_par
 {
     fstream entalpie;
-    entalpie.open("entalphy_table.txt", ios::in);
+    entalpie.open("enthalpy_table.txt", ios::in);
     if(entalpie.good() == true)
     {
         for (int i=0; i<91; i++)
@@ -203,6 +203,7 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
 
             string surowa_linijka;
             string references;
+            string struktura;
             string processing_condition;
 
             getline(lista,surowa_linijka_cala);
@@ -212,11 +213,13 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
             // Poniżej dzielę linijkę na: wzór, numer pracy, budowe...
 
             stringstream string_calej_linijki_w_strumien(surowa_linijka_cala);
-            string_calej_linijki_w_strumien >> surowa_linijka >> processing_condition >> references;
+            string_calej_linijki_w_strumien >> surowa_linijka >> processing_condition >> struktura >> references;
 
             wyniki.push_back(surowa_linijka);
 
+
             cout << "Processing Condition: " << processing_condition <<endl;
+            cout << "Struktura: " <<struktura<<endl;
             cout << "References: " << references <<endl;
 
 
@@ -334,8 +337,9 @@ void wczytuje_liste_do_przeliczenia() // wczytuje liste do przeliczenia i wysył
             wyniki.push_back(to_string(licze_delta_chi(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_paulingow_w_linijce)));
             wyniki.push_back(to_string(licze_delta_s(symbole_w_linijce.size(), ulamki_molowe_w_linijce)));
             wyniki.push_back(to_string(licze_temp_m(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_tm_w_linijce)));
-            wyniki.push_back(to_string( licze_entalpia_mix(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_liczb_atomowych_w_linijce)));
+            wyniki.push_back(to_string(licze_entalpia_mix(symbole_w_linijce.size(), ulamki_molowe_w_linijce, tablica_liczb_atomowych_w_linijce)));
             wyniki.push_back(processing_condition);
+            wyniki.push_back(struktura);
             wyniki.push_back(references);
 
             /*
@@ -372,7 +376,7 @@ void zapis_do_pliku()
         {
             result << wyniki[i] << '\t' ;
 
-            if(i==8 || i>10 && i%9==8)
+            if(i%10==9)
             {
                result <<endl;
             }
@@ -392,12 +396,35 @@ int main()
 
 
     /*
-     Do zrobienia:
-    - temperatura topnienia
-    - etykieta stopu - w kolumnach wyniki
-    - z jakiej pracy stop pochodzi
-    - podzial na AC i pozostałe
-    - porównywanie VEC
+
+    dodać omege
+
+    pisanie:
+    1. plan ramowy (rozdzialy i podrozdzialy)
+
+    1. stopy o wysokiej entropii
+    1.1. opis termodynamiczny t-deltas itd TERMODYNAMIKA HEA
+    1.2 kryteria empiryczne kto zaproponowal co wynika jakie sa dotychczas spojrzenie na werości KRYTERIA EMPIRYCZNE
+    1.3. dlatego stopy istotne, krotki przeflad HEA , 4 core effects WŁAŚCIWOSCI HEA
+    2. Cele pracy (weryfukacji kryteriow empirycznych, teraz globalne podejscie i sprawdzenie)
+    3. Metodologia
+    - ramowy plan, schemat blokowy
+    - funkcje programu, jak licza
+    4. wyniki
+    5. dyskusja (jak sie ma kryteria do tego co zrobilismy)
+    bez aneksu 40-60 stron
+    literatura kilkadziesiąt pozycji, bo praca przeglądowa
+    6. aneks
+
+
+
+    WYKRESY:
+    mala delta(omega)
+    mala delta(Hmix)
+    mala delta(VEC)
+    z podziałem na FCC i BCC,
+
+
     */
 
 }

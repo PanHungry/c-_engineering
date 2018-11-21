@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
 1526935243 source:c:\users\kamil\desktop\praca_cb\tpierwiastek.cpp
 
-1529239753 source:c:\users\kamil\desktop\praca_cb\main.cpp
+1534323314 source:c:\users\kamil\desktop\praca_cb\main.cpp
 	<iostream>
 	<fstream>
 	<vector>
